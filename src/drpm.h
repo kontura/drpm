@@ -107,6 +107,9 @@
  */
 #endif
 #define DRPM_COMP_LZIP 5    /**< lzip */
+#ifdef WITH_ZSTD
+#define DRPM_COMP_ZSTD 6    /**< zstd */
+#endif
 /** @} */
 
 /**

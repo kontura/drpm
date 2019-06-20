@@ -166,6 +166,9 @@ int drpm_make_options_set_delta_comp(struct drpm_make_options *opts, unsigned sh
     case DRPM_COMP_LZMA:
     case DRPM_COMP_XZ:
     case DRPM_COMP_LZIP:
+#ifdef WITH_ZSTD
+    case DRPM_COMP_ZSTD:
+#endif
         opts->comp_from_rpm = false;
         opts->comp = comp;
         opts->comp_level = level;

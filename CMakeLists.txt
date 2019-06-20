@@ -4,9 +4,13 @@ project(drpm)
 
 option(ENABLE_TESTS "Build and run tests?" ON)
 
+INCLUDE_DIRECTORIES (${CMAKE_SOURCE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
 find_package(ZLIB REQUIRED)
 find_package(BZip2 REQUIRED)
 find_package(LibLZMA REQUIRED)
+find_package(Zstd REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(RPM rpm REQUIRED)
@@ -28,7 +32,7 @@ set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSIO
 include(CPack)
 
 set(DRPM_SOURCES drpm.c drpm_apply.c drpm_block.c drpm_compstrm.c drpm_decompstrm.c drpm_deltarpm.c drpm_diff.c drpm_make.c drpm_options.c drpm_read.c drpm_rpm.c drpm_search.c drpm_utils.c drpm_write.c)
-set(DRPM_LINK_LIBRARIES ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES} ${LIBLZMA_LIBRARIES} ${RPM_LIBRARIES} ${LIBCRYPTO_LIBRARIES})
+set(DRPM_LINK_LIBRARIES ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZSTD_LIBRARIES} ${RPM_LIBRARIES} ${LIBCRYPTO_LIBRARIES})
 
 if (HAVE_LZLIB_DEVEL)
    list(APPEND DRPM_LINK_LIBRARIES lz)
